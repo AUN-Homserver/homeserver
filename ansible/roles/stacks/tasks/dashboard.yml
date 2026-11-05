@@ -7,6 +7,31 @@
     group: "{{ admin_user }}"
     mode: "0750"
 
+# Bilder getrennt von der Konfiguration, im Container unter /app/public/images (= /images)
+- name: Ordner für Bilder der Startseite
+  ansible.builtin.file:
+    path: "{{ appdata_dir }}/homepage-bilder"
+    state: directory
+    owner: "{{ admin_user }}"
+    group: "{{ admin_user }}"
+    mode: "0755"
+
+- name: AUN-Layout für die Startseite (Hintergrund und Logo)
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ appdata_dir }}/homepage-bilder/{{ item.dest }}"
+    owner: "{{ admin_user }}"
+    group: "{{ admin_user }}"
+    mode: "0644"
+  loop:
+    # Dateiname aun-wallpaper-<Nr>-<Name>.jpg, gewählt wird über den Namen
+    - src: "{{ lookup('fileglob', aun_layout_dir ~ '/kodi-wallpaper/aun-wallpaper-*-' ~ homepage_hintergrund ~ '.jpg', errors='strict') }}"
+      dest: hintergrund.jpg
+    - { src: "{{ aun_layout_dir }}/logos/aun-favicon.png", dest: aun-favicon.png }
+  loop_control:
+    label: "{{ item.dest }}"
+  when: aun_layout | bool
+
 # Homepage liest die Dateien bei jedem Aufruf neu, ein Neustart ist nicht nötig
 - name: Homepage-Konfiguration
   ansible.builtin.template:

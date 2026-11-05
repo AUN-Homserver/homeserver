@@ -31,7 +31,7 @@ jobs:
           # erst einsammeln: "| grep -q" kann git mit SIGPIPE beenden
           geaendert=$(git diff --name-only HEAD^1 HEAD)
           if [ "$EVENT" != pull_request ] \
-            || grep -qE '^(ansible|installer|dev|stacks|bin|lib|config|cockpit)/|^\.github/workflows/vm-test\.yml$' <<<"$geaendert"; then
+            || grep -qE '^(ansible|installer|dev|stacks|bin|lib|config|cockpit|assets)/|^\.github/workflows/vm-test\.yml$' <<<"$geaendert"; then
             echo "vm=true" >> "$GITHUB_OUTPUT"
           else
             echo "vm=false" >> "$GITHUB_OUTPUT"
@@ -302,6 +302,13 @@ jobs:
             api "$name" "$port" qualityprofile \
               | jq -e '.[] | select(.name == "[German] HD Bluray + WEB") | .cutoffFormatScore == 13500'
           done
+
+      - name: AUN-Layout auf der Startseite und in der Freigabe shares
+        run: |
+          ssh_vm() { ssh -n -p 2222 -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null nasadmin@localhost "$@"; }
+          ssh_vm "curl -fsS -o /dev/null -w '%{content_type}\n' http://127.0.0.1:3010/images/hintergrund.jpg" | grep -q '^image/jpeg'
+          ssh_vm "curl -fsS -o /dev/null http://127.0.0.1:3010/images/aun-favicon.png"
+          test "$(ssh_vm "find /srv/data/shares/AUN-Layout -name '*.jpg' | wc -l")" -ge 20
 
       - name: Firewall ohne DLNA-Liste, PS2-IP und LAN-Ports wie bisher (kein SSDP, keine Umleitung, kein 8400)
         run: |

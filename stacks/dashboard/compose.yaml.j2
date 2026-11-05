@@ -12,6 +12,7 @@ services:
       TZ: {{ timezone }}
     volumes:
       - {{ appdata_dir }}/homepage:/app/config
+      - {{ appdata_dir }}/homepage-bilder:/app/public/images:ro
       - {{ data_mount }}:{{ data_mount }}:ro
     ports:
       - 127.0.0.1:{{ stacks_ports.homepage }}:3000

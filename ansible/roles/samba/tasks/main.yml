@@ -88,3 +88,15 @@
   when:
     - not samba_legacy.enabled | bool
     - samba_legacy_unit.stat.exists
+
+# Wallpaper, Emby-Bibliotheksbilder und Logos zum Setzen per Klick (Kodi, Emby). Abschalten
+# löscht den Ordner nicht, er gehört dann dem Nutzer.
+- name: AUN-Layout in der Freigabe shares
+  ansible.builtin.copy:
+    src: "{{ aun_layout_dir }}/"
+    dest: "{{ data_mount }}/shares/AUN-Layout/"
+    owner: "{{ admin_user }}"
+    group: "{{ admin_user }}"
+    mode: "0664"
+    directory_mode: "2775"
+  when: aun_layout | bool
