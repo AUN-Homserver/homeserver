@@ -1,0 +1,36 @@
+/* AUN-Layout für Cockpit (aunserver, Ansible kopiert nach /etc/cockpit/branding).
+   Cockpit sucht dort zuerst, Dateien, die hier fehlen, kommen aus dem Debian-Branding. */
+
+:root {
+    --ct-color-host-accent: #d8141e !important;
+}
+
+#badge {
+    inline-size: 225px;
+    block-size: 80px;
+    background-image: url("logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#brand::before {
+    content: "${NAME}";
+}
+
+/* nur die Anmeldeseite: Rauch ohne Logo (das Formular stünde sonst darauf), roter Knopf.
+   "html body" wie in login.css, sonst gewinnt deren Hintergrund */
+html body.login-pf {
+    background: url("hintergrund.jpg") center / cover no-repeat fixed, #0b0606;
+}
+
+html body.login-pf #brand {
+    color: #fff;
+}
+
+html body.login-pf #login-button {
+    background-color: #b3121a;
+}
+
+html body.login-pf #login-button:hover {
+    background-color: #d8141e;
+}

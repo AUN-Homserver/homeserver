@@ -96,7 +96,7 @@ recyclarr_eigene_config: false
 # Upgrades nur, bis ein Release diese Custom-Format-Punktzahl erreicht (13500 = gutes German DL)
 stacks_recyclarr_upgrade_until_score: 13500
 
-# AUN-Layout: Hintergrund und Logo auf der Startseite, alle Bilder in der Freigabe shares/AUN-Layout
+# AUN-Layout: Hintergrund und Logo auf Startseite und Cockpit-Anmeldung, alle Bilder in der Freigabe shares/AUN-Layout
 aun_layout: true
 
 # Wallpaper als Hintergrund der Startseite (Homepage)

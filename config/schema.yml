@@ -326,10 +326,10 @@ einstellungen:
     standard: true
     bereich: system
     stufe: erweitert
-    text: "AUN-Layout: Hintergrund und Logo auf der Startseite, alle Bilder in der Freigabe shares/AUN-Layout"
+    text: "AUN-Layout: Hintergrund und Logo auf Startseite und Cockpit-Anmeldung, alle Bilder in der Freigabe shares/AUN-Layout"
     hinweis: >-
       Wallpaper für Kodi, Bilder für die Emby-Bibliotheken und Logos aus assets/aun-layout. Ausschalten
-      nimmt Hintergrund und Logo von der Startseite, der Ordner in der Freigabe bleibt.
+      nimmt Hintergrund und Logo von Startseite und Cockpit, der Ordner in der Freigabe bleibt.
   homepage_hintergrund:
     typ: auswahl
     werte: [roll-it, error-420, high-time, its-420, puff-puff-play, stay-high, rewind-relax,

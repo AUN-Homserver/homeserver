@@ -9,5 +9,6 @@ Bilder im Design von AUN, gestaltet für dieses Projekt. Verkleinert aus den Ori
 | `logos/` | Logos, freigestellt und auf Schwarz, Favicon | Startseite, Cockpit, Bootmenü |
 | `github/` | Banner 1600×400, Vorschau 1280×640 | Profil der Organisation, Social Preview |
 | `sonstiges/` | Collage | – |
+| `system/` | Cockpit-Logo, Favicon und Hintergrund der Anmeldung (Rauch ohne Logo), Bootbild 640×480 | Cockpit (`/etc/cockpit/branding`), Bootmenü des ISO |
 
-Mit `aun_layout: true` (Standard) kopiert das Setup diesen Ordner nach `\\<NAS>\shares\AUN-Layout`.
+Mit `aun_layout: true` (Standard) kopiert das Setup diesen Ordner nach `\\<NAS>\shares\AUN-Layout` und setzt das Branding von Cockpit. Das Bootbild ist immer im ISO.

@@ -113,7 +113,7 @@ stacks_recyclarr_groessen:
     - {name: WEBDL-1080p, min: 15, preferred: 45, max: 70}
     - {name: Bluray-1080p, min: 15, preferred: 45, max: 70}
 
-# AUN-Layout: Hintergrund und Logo auf der Startseite, alle Bilder in der Freigabe shares/AUN-Layout
+# AUN-Layout: Hintergrund und Logo auf Startseite und Cockpit-Anmeldung, alle Bilder in der Freigabe shares/AUN-Layout
 aun_layout: true
 
 # Wallpaper als Hintergrund der Startseite (Homepage)

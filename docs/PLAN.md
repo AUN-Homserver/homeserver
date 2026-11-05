@@ -258,6 +258,7 @@ aunserver/
 │   ├── beispiele/               # z. B. eigene Recyclarr-Profile (nicht ausgerollt)
 │   └── BETRIEB.md               # Bedienung, Updates, Wiederherstellung
 ├── assets/aun-layout/           # Bilder im AUN-Design: Wallpaper, Emby-Bibliotheken, Logos, GitHub
+├── cockpit/branding/            # AUN-Layout für Cockpit (nach /etc/cockpit/branding)
 ├── cockpit/aunserver/           # Cockpit-Seite: Einstellungen, Übernehmen, Verlauf, Passwörter (D22)
 ├── installer/
 │   ├── build-iso.sh
