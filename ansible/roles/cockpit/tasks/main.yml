@@ -13,6 +13,8 @@
     group: root
     mode: "0755"
 
+# GitHub antwortet beim Herunterladen manchmal nicht rechtzeitig ("The read operation timed out",
+# VM-Test von #68); ohne Wiederholung brach das ganze Setup ab
 - name: Plugin-Pakete laden (SHA256 geprüft)
   ansible.builtin.get_url:
     url: "{{ item.url }}"
@@ -21,9 +23,14 @@
     owner: root
     group: root
     mode: "0644"
+    timeout: 60
   loop: "{{ cockpit_plugins }}"
   loop_control:
     label: "{{ item.name }} {{ item.version }}"
+  register: cockpit_plugin_download
+  until: cockpit_plugin_download is succeeded
+  retries: 4
+  delay: 20
 
 - name: Plugins installieren
   ansible.builtin.apt:
