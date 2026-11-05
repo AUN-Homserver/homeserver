@@ -78,8 +78,9 @@ Vorauswahl der Apps bei der Ersteinrichtung (Setup und Assistent); danach gelten
 |---|---|---|---|---|
 | `emby_dlna_renderers` | liste (ip) | `[]` | erweitert | DLNA-Abspielgeräte (z. B. Sonos) für Emby „Wiedergabe auf“, feste IPs (nur mit `apps.emby`) |
 | `recyclarr_eigene_config` | bool | `false` | erweitert | Eigene recyclarr.yml im appdata-Ordner statt der TRaSH-Vorlage. Ansible schreibt die Vorlage dann nicht mehr darüber (docs/BETRIEB.md, Indexer) (nur mit `apps.medien`) |
+| `stacks_recyclarr_min_score` | zahl | `10000` | erweitert | Mindestpunktzahl für Downloads (10000 = nur Deutsch, 0 = Englisch als Notlösung) German zählt 10000, German DL 11000, rein englische Releases kommen auf 1500–3500. Mit 0 lädt Sonarr/Radarr Englisch, solange es keine deutsche Fassung gibt, und ersetzt es später (doppelter Download). (nur mit `apps.medien`) |
 | `stacks_recyclarr_upgrade_until_score` | zahl | `13500` | erweitert | Upgrades nur, bis ein Release diese Custom-Format-Punktzahl erreicht (13500 = gutes German DL) DL 11000 + 1080p 700 + WEB-Stufe ab 1800. Die TRaSH-Vorlage ersetzte sonst vorhandene WEB-Releases durch viel größere Bluray-Encodes (doppelter Download). (nur mit `apps.medien`) |
-| `stacks_recyclarr_groessen` | objekt (liste) | siehe Schema | erweitert | Größengrenzen in MB pro Minute Laufzeit, je App eine Liste (60 MB/min = 3,6 GB pro Stunde) Die TRaSH-Vorlage hat kein Maximum (Bluray-Encodes mit ~150 MB/min) und lehnte kleine x265-Encodes als zu klein ab. Eine App hier angeben ersetzt nur deren Liste. (nur mit `apps.medien`) |
+| `stacks_recyclarr_groessen` | objekt (liste) | siehe Schema | erweitert | Größengrenzen in MB pro Minute Laufzeit, je App eine Liste (100 MB/min = 6 GB pro Stunde) Die TRaSH-Vorlage hat kein Maximum (Bluray-Encodes mit ~150 MB/min) und lehnte kleine x265-Encodes als zu klein ab. Eine App hier angeben ersetzt nur deren Liste. (nur mit `apps.medien`) |
 
 ## Benachrichtigungen
 

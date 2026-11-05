@@ -93,6 +93,9 @@ emby_dlna_renderers: []
 # Eigene recyclarr.yml im appdata-Ordner statt der TRaSH-Vorlage
 recyclarr_eigene_config: false
 
+# Mindestpunktzahl für Downloads (10000 = nur Deutsch, 0 = Englisch als Notlösung)
+stacks_recyclarr_min_score: 10000
+
 # Upgrades nur, bis ein Release diese Custom-Format-Punktzahl erreicht (13500 = gutes German DL)
 stacks_recyclarr_upgrade_until_score: 13500
 

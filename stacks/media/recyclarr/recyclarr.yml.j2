@@ -4,6 +4,10 @@
 # und Upgrades nur bis German DL in guter Qualität (Werte in roles/stacks/defaults).
 # "Golden Rule HD" bewusst weggelassen: sie fügt "x265 (HD)" mit 0 Punkten hinzu und
 # würde mit dem Bonus unten kollidieren.
+# Mindestpunktzahl statt 0 der Vorlage: 10000 = nur Deutsch (Empfehlung von TRaSH), sonst lud
+# es Englisch, solange es keine deutsche Fassung gab, und ersetzte es später.
+# "German Microsized" (FuN, GTF, ...: kleine x265-Encodes) nicht blockiert, sondern mit
+# leichtem Plus: German DL + x265 erreicht damit genau die Upgrade-Grenze und wird nicht ersetzt.
 # API-Schlüssel stehen in secrets.yml (schreibt das Setup bei jedem Lauf).
 
 sonarr:
@@ -19,6 +23,7 @@ sonarr:
 {% endfor %}
     quality_profiles:
       - trash_id: dca7e5e9e99c703bcbdaaa471dd40e98  # [German] HD Bluray + WEB
+        min_format_score: {{ stacks_recyclarr_min_score }}
         reset_unmatched_scores:
           enabled: true
         upgrade:
@@ -27,12 +32,19 @@ sonarr:
     custom_format_groups:
       add:
         - trash_id: 6f0872eebfc95b1f93474b7ac866ced0  # [Unwanted] Unwanted Formats German
+          exclude:
+            - 237eda4ef550a97da2c9d87b437e500b  # German Microsized
     custom_formats:
       - trash_ids:
           - 47435ece6b99a0b477caf360e79ba0bb  # x265 (HD)
         assign_scores_to:
           - trash_id: dca7e5e9e99c703bcbdaaa471dd40e98
             score: {{ stacks_recyclarr_x265_score }}
+      - trash_ids:
+          - 237eda4ef550a97da2c9d87b437e500b  # German Microsized
+        assign_scores_to:
+          - trash_id: dca7e5e9e99c703bcbdaaa471dd40e98
+            score: {{ stacks_recyclarr_microsized_score }}
 
 radarr:
   radarr:
@@ -47,6 +59,7 @@ radarr:
 {% endfor %}
     quality_profiles:
       - trash_id: 2b90e905c99490edc7c7a5787443748b  # [German] HD Bluray + WEB
+        min_format_score: {{ stacks_recyclarr_min_score }}
         reset_unmatched_scores:
           enabled: true
         upgrade:
@@ -55,9 +68,16 @@ radarr:
     custom_format_groups:
       add:
         - trash_id: 0ca61b4b233178d07113082a7acff72d  # [Unwanted] Unwanted Formats German
+          exclude:
+            - 03c430f326f10a27a9739b8bc83c30e4  # German Microsized
     custom_formats:
       - trash_ids:
           - dc98083864ea246d05a42df0d05f81cc  # x265 (HD)
         assign_scores_to:
           - trash_id: 2b90e905c99490edc7c7a5787443748b
             score: {{ stacks_recyclarr_x265_score }}
+      - trash_ids:
+          - 03c430f326f10a27a9739b8bc83c30e4  # German Microsized
+        assign_scores_to:
+          - trash_id: 2b90e905c99490edc7c7a5787443748b
+            score: {{ stacks_recyclarr_microsized_score }}
