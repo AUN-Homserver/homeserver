@@ -289,18 +289,21 @@ jobs:
           test "$(ssh_vm "stat -c %a /srv/appdata/recyclarr/secrets.yml")" = 600
           if ssh_vm "grep -E 'api_key: [0-9a-f]{32}' /srv/appdata/recyclarr/recyclarr.yml"; then exit 1; fi
 
-      - name: Recyclarr hat Größengrenzen und Upgrade-Grenze in Sonarr und Radarr gesetzt
+      - name: Recyclarr hat Größen, Mindest- und Upgrade-Grenze und Punkte in Sonarr und Radarr gesetzt
         run: |
           ssh_vm() { ssh -n -p 2222 -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null nasadmin@localhost "$@"; }
           api() { # api APP PORT PFAD
             ssh_vm "k=\$(grep -oP '(?<=<ApiKey>)\\w+' /srv/appdata/$1/config.xml); curl -fsS -H \"X-Api-Key: \$k\" http://127.0.0.1:$2/api/v3/$3"
           }
-          for app in "sonarr 3102 60" "radarr 3103 70"; do
-            read -r name port max <<<"$app"
+          for app in "sonarr 3102" "radarr 3103"; do
+            read -r name port <<<"$app"
             api "$name" "$port" qualitydefinition \
-              | jq -e --argjson max "$max" '.[] | select(.quality.name == "Bluray-1080p") | .maxSize == $max and .minSize == 15'
-            api "$name" "$port" qualityprofile \
-              | jq -e '.[] | select(.name == "[German] HD Bluray + WEB") | .cutoffFormatScore == 13500'
+              | jq -e '.[] | select(.quality.name == "Bluray-1080p") | .maxSize == 100 and .minSize == 15'
+            # nur Deutsch (10000), German Microsized nicht blockiert (+300), x265 +1500
+            api "$name" "$port" qualityprofile | jq -e '.[] | select(.name == "[German] HD Bluray + WEB")
+              | .cutoffFormatScore == 13500 and .minFormatScore == 10000
+                and ([.formatItems[] | select(.name == "German Microsized") | .score] == [300])
+                and ([.formatItems[] | select(.name == "x265 (HD)") | .score] == [1500])'
           done
 
       - name: AUN-Layout auf der Startseite, in Cockpit und in der Freigabe shares
