@@ -309,8 +309,10 @@ jobs:
       - name: AUN-Layout auf der Startseite, in Cockpit und in der Freigabe shares
         run: |
           ssh_vm() { ssh -n -p 2222 -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null nasadmin@localhost "$@"; }
-          ssh_vm "curl -fsS -o /dev/null -w '%{content_type}\n' http://127.0.0.1:3010/images/hintergrund.jpg" | grep -q '^image/jpeg'
-          ssh_vm "curl -fsS -o /dev/null http://127.0.0.1:3010/images/aun-favicon.png"
+          # Homepage antwortet nur unter ihrem Namen (HOMEPAGE_ALLOWED_HOSTS), sonst 400
+          h="Host: home.nas.home.arpa"
+          ssh_vm "curl -fsS -H '$h' -o /dev/null -w '%{content_type}\n' http://127.0.0.1:3010/images/hintergrund.jpg" | grep -q '^image/jpeg'
+          ssh_vm "curl -fsS -H '$h' -o /dev/null http://127.0.0.1:3010/images/aun-favicon.png"
           test "$(ssh_vm "find /srv/data/shares/AUN-Layout -name '*.jpg' | wc -l")" -ge 20
           # Cockpit liefert /etc/cockpit/branding vor dem Debian-Branding aus
           ssh_vm "curl -fsSk https://127.0.0.1:9090/cockpit/static/branding.css" | grep -q 'AUN-Layout'
