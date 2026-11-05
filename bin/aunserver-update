@@ -7,7 +7,7 @@
 set -euo pipefail
 
 REPO=$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/.." && pwd)
-GH_REPO=${AUNSERVER_GH_REPO:-D-A-W-N/homeserver}
+GH_REPO=${AUNSERVER_GH_REPO:-AUN-Homserver/homeserver}
 BRANCH=${AUNSERVER_BRANCH:-main}
 API=https://api.github.com/repos/$GH_REPO
 STATE_DIR=/var/lib/aunserver
