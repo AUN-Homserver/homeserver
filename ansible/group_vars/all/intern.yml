@@ -8,6 +8,8 @@ data_mount: /srv/data
 data_label: AUNDATA
 appdata_dir: /srv/appdata
 stacks_dir: /opt/stacks
+# Bilder des AUN-Layouts im Repo (Startseite, Freigabe, Cockpit)
+aun_layout_dir: "{{ playbook_dir }}/../assets/aun-layout"
 
 data_dirs:
   - usenet

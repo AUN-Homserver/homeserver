@@ -338,6 +338,26 @@ einstellungen:
       Die TRaSH-Vorlage hat kein Maximum (Bluray-Encodes mit ~150 MB/min) und lehnte kleine x265-Encodes
       als zu klein ab. Eine App hier angeben ersetzt nur deren Liste.
 
+  # --- AUN-Layout ---
+  aun_layout:
+    typ: bool
+    standard: true
+    bereich: system
+    stufe: erweitert
+    text: "AUN-Layout: Hintergrund und Logo auf Startseite und Cockpit-Anmeldung, alle Bilder in der Freigabe shares/AUN-Layout"
+    hinweis: >-
+      Wallpaper für Kodi, Bilder für die Emby-Bibliotheken und Logos aus assets/aun-layout. Ausschalten
+      nimmt Hintergrund und Logo von Startseite und Cockpit, der Ordner in der Freigabe bleibt.
+  homepage_hintergrund:
+    typ: auswahl
+    werte: [roll-it, error-420, high-time, its-420, puff-puff-play, stay-high, rewind-relax,
+            nur-noch-eine-folge, couch-modus, kein-plan]
+    standard: roll-it
+    bereich: system
+    braucht: aun_layout
+    stufe: erweitert
+    text: Wallpaper als Hintergrund der Startseite (Homepage)
+
   # --- Benachrichtigungen ---
   ntfy_default_access:
     typ: auswahl

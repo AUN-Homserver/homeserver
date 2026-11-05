@@ -57,6 +57,32 @@
     mode: "0644"
     directory_mode: "0755"
 
+# AUN-Layout: Cockpit liest /etc/cockpit/branding vor dem Debian-Branding (ab Cockpit 347),
+# das übersteht Paket-Updates. Dateien werden bei jedem Aufruf gelesen, kein Neustart nötig.
+- name: Ordner für das Cockpit-Branding
+  ansible.builtin.file:
+    path: /etc/cockpit/branding
+    state: "{{ 'directory' if aun_layout | bool else 'absent' }}"
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: AUN-Layout für Cockpit (Logo, Favicon, Hintergrund der Anmeldeseite)
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "/etc/cockpit/branding/{{ item.dest }}"
+    owner: root
+    group: root
+    mode: "0644"
+  loop:
+    - { src: "{{ playbook_dir }}/../cockpit/branding/branding.css", dest: branding.css }
+    - { src: "{{ aun_layout_dir }}/system/cockpit-logo.png", dest: logo.png }
+    - { src: "{{ aun_layout_dir }}/system/cockpit-favicon.ico", dest: favicon.ico }
+    - { src: "{{ aun_layout_dir }}/system/cockpit-hintergrund.jpg", dest: hintergrund.jpg }
+  loop_control:
+    label: "{{ item.dest }}"
+  when: aun_layout | bool
+
 - name: Cockpit-Anmeldeseite
   ansible.builtin.copy:
     dest: /etc/cockpit/cockpit.conf

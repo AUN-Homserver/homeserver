@@ -44,6 +44,8 @@ Vorauswahl der Apps bei der Ersteinrichtung (Setup und Assistent); danach gelten
 | `base_auto_reboot` | bool | `true` | erweitert | Nach Sicherheitsupdates automatisch neu starten, wenn nötig |
 | `base_auto_reboot_time` | text (zeit) | `'04:00'` | erweitert | Uhrzeit für den automatischen Neustart (nur mit `base_auto_reboot`) |
 | `update_check` | bool | `true` | erweitert | Täglich nach neuen Ständen von aunserver suchen und per ntfy melden (installiert wird per Hand) |
+| `aun_layout` | bool | `true` | erweitert | AUN-Layout: Hintergrund und Logo auf Startseite und Cockpit-Anmeldung, alle Bilder in der Freigabe shares/AUN-Layout. Wallpaper für Kodi, Bilder für die Emby-Bibliotheken und Logos aus assets/aun-layout. Ausschalten nimmt Hintergrund und Logo von Startseite und Cockpit, der Ordner in der Freigabe bleibt. |
+| `homepage_hintergrund` | `roll-it` \| `error-420` \| `high-time` \| `its-420` \| `puff-puff-play` \| `stay-high` \| `rewind-relax` \| `nur-noch-eine-folge` \| `couch-modus` \| `kein-plan` | `roll-it` | erweitert | Wallpaper als Hintergrund der Startseite (Homepage) (nur mit `aun_layout`) |
 
 ## Netz und Zugriff
 

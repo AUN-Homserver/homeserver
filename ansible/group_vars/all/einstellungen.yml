@@ -119,6 +119,12 @@ stacks_recyclarr_groessen:
     - {name: WEBDL-1080p, min: 15, preferred: 45, max: 100}
     - {name: Bluray-1080p, min: 15, preferred: 45, max: 100}
 
+# AUN-Layout: Hintergrund und Logo auf Startseite und Cockpit-Anmeldung, alle Bilder in der Freigabe shares/AUN-Layout
+aun_layout: true
+
+# Wallpaper als Hintergrund der Startseite (Homepage)
+homepage_hintergrund: roll-it
+
 # ntfy ohne Anmeldung: read-write = jeder im Netz liest und sendet; write-only = lesen nur mit ntfy-Benutzer
 ntfy_default_access: read-write
 
