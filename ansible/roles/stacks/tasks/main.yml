@@ -8,6 +8,14 @@
     fail_msg: "Doppelte Ports in stacks_ports: {{ stacks_ports }}"
     quiet: true
 
+- name: Eigene Seiten (caddy_eigene_seiten) überschneiden sich nicht mit den Apps
+  ansible.builtin.assert:
+    that:
+      - caddy_eigene_seiten | map(attribute='name') | intersect(stacks_hosts.values() | list) | length == 0
+      - caddy_eigene_seiten | map(attribute='port') | intersect(stacks_ports.values() | list) | length == 0
+    fail_msg: "caddy_eigene_seiten: name ist schon eine Subdomain (stacks_hosts) oder port gehört schon einer App (stacks_ports)."
+    quiet: true
+
 # --- Zugangsdaten -------------------------------------------------------------
 
 - name: Ordner für Zugangsdaten

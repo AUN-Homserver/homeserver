@@ -48,6 +48,13 @@ Weitere Apps{{ ' (Recommendarr, PS2GameManager: Passwortabfrage des Browsers, We
 {% elif apps.emby | bool %}
   Noch einzutragen: Bibliotheken in Emby
 {% endif %}
+{% if caddy_eigene_seiten %}
+
+Eigene Apps (caddy_eigene_seiten; mit Passwortabfrage: Web-Passwort)
+{% for seite in caddy_eigene_seiten %}
+  {{ '%-13s' | format(seite.name) }} https://{{ seite.name }}.{{ domain }}{{ '' if seite.geschuetzt | default(true) | bool else '   (ohne Passwortabfrage)' }}
+{% endfor %}
+{% endif %}
 
 Ohne Anmeldung (nur aus LAN/VPN erreichbar)
   ntfy          https://{{ stacks_hosts.ntfy }}.{{ domain }}   (Themen: smart, beszel, backup, updates)
@@ -57,6 +64,9 @@ Ohne Namen, nur aus dem LAN (caddy_lan_ports; gleiche Anmeldung wie oben)
 {% for app, port in stacks_lan_ports.items() | sort(attribute='1')
    if (apps[app] if app in apps else (apps.medien if app in ['prowlarr', 'sabnzbd', 'sonarr', 'radarr', 'lidarr', 'bazarr'] else true)) | bool %}
   {{ '%-13s' | format(app | capitalize) }} https://{{ ansible_facts.default_ipv4.address }}:{{ port }}
+{% endfor %}
+{% for seite in caddy_eigene_seiten if seite.lan_port is defined %}
+  {{ '%-13s' | format(seite.name) }} https://{{ ansible_facts.default_ipv4.address }}:{{ seite.lan_port }}
 {% endfor %}
 
 {% endif %}

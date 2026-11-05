@@ -12,6 +12,36 @@
         fail_msg: "admin_user darf nicht root sein, und nur eines von tailscale/wireguard ist erlaubt."
         quiet: true
 
+    # vor der Firewall (Rolle security), die lan_port übernimmt
+    - name: Einträge in caddy_eigene_seiten prüfen
+      ansible.builtin.assert:
+        that:
+          - item is mapping
+          - item.keys() | difference(['name', 'port', 'lan_port', 'geschuetzt']) | length == 0
+          - item.name is defined and item.name is string and item.name is match('^[a-z0-9]([a-z0-9-]*[a-z0-9])?$')
+          - item.port is defined and item.port is integer and item.port >= 1 and item.port <= 65535
+          - item.lan_port is not defined or (item.lan_port is integer and item.lan_port >= 1 and item.lan_port <= 65535)
+          - item.geschuetzt is not defined or item.geschuetzt is boolean
+        fail_msg: >-
+          caddy_eigene_seiten: ungültiger Eintrag {{ item }}. Erlaubt sind name (Kleinbuchstaben, Ziffern, Bindestrich),
+          port und lan_port (Zahl 1-65535) und geschuetzt (true/false).
+        quiet: true
+      loop: "{{ caddy_eigene_seiten }}"
+      loop_control:
+        label: "{{ item.name | default(item) }}"
+
+    - name: Namen und LAN-Ports in caddy_eigene_seiten sind eindeutig
+      ansible.builtin.assert:
+        that:
+          - namen | unique | length == namen | length
+          - lan | unique | length == lan | length
+          - lan | intersect(stacks_lan_ports.values() | list) | length == 0
+        fail_msg: "caddy_eigene_seiten: doppelter Name oder lan_port, oder lan_port schon in stacks_lan_ports belegt."
+        quiet: true
+      vars:
+        namen: "{{ caddy_eigene_seiten | map(attribute='name') | list }}"
+        lan: "{{ caddy_eigene_seiten | selectattr('lan_port', 'defined') | map(attribute='lan_port') | list }}"
+
     - name: Benutzerdaten des Admin-Benutzers lesen
       ansible.builtin.getent:
         database: passwd

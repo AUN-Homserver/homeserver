@@ -40,9 +40,10 @@ table inet aunserver {
 		ip6 saddr @lan6 tcp dport { {{ security_tcp_ports | join(', ') }} } accept
 		ip6 saddr @lan6 udp dport { {{ security_udp_ports | join(', ') }} } accept
 {% if caddy_lan_ports | bool %}
-		# Web-Apps über IP und Port (caddy_lan_ports): nur LAN, über VPN gehen die Namen
-		ip saddr @lan4 tcp dport { {{ stacks_lan_ports.values() | sort | join(', ') }} } accept
-		ip6 saddr @lan6 tcp dport { {{ stacks_lan_ports.values() | sort | join(', ') }} } accept
+{% set lan_ports = (stacks_lan_ports.values() | list) + (caddy_eigene_seiten | selectattr('lan_port', 'defined') | map(attribute='lan_port') | list) %}
+		# Web-Apps über IP und Port (caddy_lan_ports, dazu lan_port aus caddy_eigene_seiten): nur LAN, über VPN gehen die Namen
+		ip saddr @lan4 tcp dport { {{ lan_ports | sort | join(', ') }} } accept
+		ip6 saddr @lan6 tcp dport { {{ lan_ports | sort | join(', ') }} } accept
 {% endif %}
 {% if samba_legacy.enabled | bool %}
 		ip saddr @ps2_clients tcp dport {{ samba_legacy.port }} accept

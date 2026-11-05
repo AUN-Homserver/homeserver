@@ -32,6 +32,13 @@ Einmalig nötig, damit die Namen wie `https://home.nas.home.arpa` funktionieren:
 
 Die Startseite fehlt (sie verlinkt nur die Namen); Emby (`http://<IP>:8096`) und Cockpit (`https://<IP>:9090`) gehen ohnehin per IP. Ports ändern: `stacks_lan_ports` in der `config.yml` überschreiben (die Firewall übernimmt sie). Die Liste steht auch in der Zugänge-Datei.
 
+**Eigene Apps hinter Caddy:** Läuft ein selbst betriebener Container auf `127.0.0.1:<port>`, reicht ein Eintrag in `caddy_eigene_seiten`, ein PR ist nicht nötig. Caddy richtet dann `https://<name>.<domain>` ein, standardmäßig mit dem Web-Passwort (`geschuetzt: false` schaltet das ab). Mit `caddy_lan_ports` und `lan_port` kommt `https://<IP>:<lan_port>` dazu, und die Firewall öffnet genau diesen Port im LAN:
+
+```bash
+sudo aunserver-config set caddy_eigene_seiten "[{name: notizen, port: 3200, lan_port: 8430}]"
+sudo aunserver-setup
+```
+
 Die IP des NAS sollte im Router fest zugewiesen sein (DHCP-Reservierung), sonst ändert sie sich irgendwann und die Namen zeigen ins Leere.
 
 **Rechner, die immer zu Hause sind** (z. B. der Desktop-PC), brauchen die Tailscale-Route zum NAS nicht: `sudo tailscale set --accept-routes=false` (Linux) bzw. in der App „Use Tailscale subnets“ aus. Sonst läuft auch zu Hause der ganze Verkehr zum NAS verschlüsselt über Tailscale, das bremst Samba-Kopien auf der schwachen NAS-CPU. Die Namen funktionieren trotzdem, den DNS liefert Tailscale weiter.

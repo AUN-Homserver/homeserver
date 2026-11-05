@@ -109,6 +109,16 @@ http://{{ domain }} {
 }
 
 {% endif %}
+{% for seite in caddy_eigene_seiten %}
+# eigene App (caddy_eigene_seiten), Container läuft außerhalb von aunserver
+{{ seite.name }}.{{ domain }}{% if caddy_lan_ports | bool and seite.lan_port is defined %}, https://{{ ansible_facts.default_ipv4.address }}:{{ seite.lan_port }}{% endif %} {
+{% if seite.geschuetzt | default(true) | bool %}
+	import geschuetzt
+{% endif %}
+	reverse_proxy 127.0.0.1:{{ seite.port }}
+}
+
+{% endfor %}
 {{ stacks_hosts.cockpit }}.{{ domain }} {
 	reverse_proxy https://127.0.0.1:9090 {
 		transport http {
