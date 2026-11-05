@@ -99,6 +99,12 @@ stacks_recyclarr_min_score: 10000
 # Upgrades nur, bis ein Release diese Custom-Format-Punktzahl erreicht (13500 = gutes German DL)
 stacks_recyclarr_upgrade_until_score: 13500
 
+# AUN-Layout: Hintergrund und Logo auf Startseite und Cockpit-Anmeldung, alle Bilder in der Freigabe shares/AUN-Layout
+aun_layout: true
+
+# Wallpaper als Hintergrund der Startseite (Homepage)
+homepage_hintergrund: roll-it
+
 # ntfy ohne Anmeldung: read-write = jeder im Netz liest und sendet; write-only = lesen nur mit ntfy-Benutzer
 ntfy_default_access: read-write
 

@@ -215,6 +215,8 @@ md5_of() { md5sum "$1" | cut -d' ' -f1; }
 } > "$WORK/md5sum.new"
 
 # --- ISO schreiben (Bootfähigkeit für UEFI und BIOS wie im Original) --------------------------
+# isolinux/splash.png (640x480) ist der Hintergrund beider Bootmenüs (isolinux und GRUB-Theme);
+# md5sum.txt führt es nicht, deshalb nur austauschen (AUN-Layout)
 info "Schreibe $(basename "$ISO_OUT")"
 rm -f "$ISO_OUT"
 xorriso -indev "$ISO_REAL" -outdev "$ISO_OUT" \
@@ -224,6 +226,7 @@ xorriso -indev "$ISO_REAL" -outdev "$ISO_OUT" \
   -map "$WORK/gtk.cfg" /isolinux/gtk.cfg \
   -map "$WORK/spkgtk.cfg" /isolinux/spkgtk.cfg \
   -map "$WORK/aunserver.cfg" /isolinux/aunserver.cfg \
+  -map "$REPO/assets/aun-layout/system/boot-splash.png" /isolinux/splash.png \
   -map "$WORK/preseed.cfg" /preseed.cfg \
   -map "$WORK/aunserver-installer" /aunserver-installer \
   -map "$WORK/md5sum.new" /md5sum.txt \

@@ -167,7 +167,7 @@ Ausgerichtet an den TRaSH Guides. **Ein** Dateisystem für Downloads und Medien,
 │   └── complete/{tv,movies,music}/
 ├── media/{tv,movies,music,books}/
 ├── games/ps2/              OPL-Struktur (CD, DVD, VMC, CFG, ART, …), Gruppe ps2share, nur per SMB1-Instanz
-└── shares/                 freie Samba-Freigaben (Dokumente, Fotos, …)
+└── shares/                 freie Samba-Freigaben (Dokumente, Fotos, …), darin AUN-Layout/ (Bilder, aun_layout)
 
 /srv/appdata/               SSD: Configs und Datenbanken aller Container
 /opt/stacks/                SSD: compose.yaml und .env pro Stack
@@ -257,6 +257,8 @@ aunserver/
 │   ├── spikes.md                # Ergebnisse der Vorab-Tests
 │   ├── beispiele/               # z. B. eigene Recyclarr-Profile (nicht ausgerollt)
 │   └── BETRIEB.md               # Bedienung, Updates, Wiederherstellung
+├── assets/aun-layout/           # Bilder im AUN-Design: Wallpaper, Emby-Bibliotheken, Logos, GitHub
+├── cockpit/branding/            # AUN-Layout für Cockpit (nach /etc/cockpit/branding)
 ├── cockpit/aunserver/           # Cockpit-Seite: Einstellungen, Übernehmen, Verlauf, Passwörter (D22)
 ├── installer/
 │   ├── build-iso.sh

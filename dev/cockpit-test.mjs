@@ -53,6 +53,8 @@ try {
     // Administratorzugriff gleich bei der Anmeldung (wie „Administratorzugriff“ einschalten);
     // eine frische Browser-Sitzung startet sonst eingeschränkt
     await seite.evaluate(u => localStorage.setItem("superuser:" + u, "any"), benutzer);
+    await seite.waitForSelector("#login-user-input");
+    await bild("anmeldung");
     await seite.fill("#login-user-input", benutzer);
     await seite.fill("#login-password-input", passwort);
     await seite.click("#login-button");

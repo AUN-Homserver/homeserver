@@ -5,6 +5,15 @@ theme: dark
 color: slate
 headerStyle: boxed
 hideVersion: true
+{% if aun_layout | bool %}
+# AUN-Layout (assets/aun-layout), das Playbook legt die Bilder nach images/
+favicon: /images/aun-favicon.png
+background:
+  image: /images/hintergrund.jpg
+  blur: sm
+  brightness: 50
+  opacity: 50
+{% endif %}
 layout:
   Verwaltung:
     style: row
