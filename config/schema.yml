@@ -286,6 +286,16 @@ einstellungen:
     stufe: erweitert
     text: Eigene recyclarr.yml im appdata-Ordner statt der TRaSH-Vorlage
     hinweis: Ansible schreibt die Vorlage dann nicht mehr darüber (docs/BETRIEB.md, Indexer)
+  stacks_recyclarr_min_score:
+    typ: zahl
+    standard: 10000
+    bereich: medien
+    braucht: apps.medien
+    stufe: erweitert
+    text: Mindestpunktzahl für Downloads (10000 = nur Deutsch, 0 = Englisch als Notlösung)
+    hinweis: >-
+      German zählt 10000, German DL 11000, rein englische Releases kommen auf 1500–3500. Mit 0 lädt
+      Sonarr/Radarr Englisch, solange es keine deutsche Fassung gibt, und ersetzt es später (doppelter Download).
   stacks_recyclarr_upgrade_until_score:
     typ: zahl
     min: 0
@@ -303,27 +313,27 @@ einstellungen:
     beispiel: false
     standard:
       sonarr:
-        - { name: HDTV-720p, min: 10, preferred: 20, max: 35 }
-        - { name: WEBRip-720p, min: 10, preferred: 20, max: 35 }
-        - { name: WEBDL-720p, min: 10, preferred: 20, max: 35 }
-        - { name: Bluray-720p, min: 10, preferred: 20, max: 35 }
-        - { name: HDTV-1080p, min: 15, preferred: 35, max: 60 }
-        - { name: WEBRip-1080p, min: 15, preferred: 35, max: 60 }
-        - { name: WEBDL-1080p, min: 15, preferred: 35, max: 60 }
-        - { name: Bluray-1080p, min: 15, preferred: 35, max: 60 }
+        - { name: HDTV-720p, min: 10, preferred: 20, max: 60 }
+        - { name: WEBRip-720p, min: 10, preferred: 20, max: 60 }
+        - { name: WEBDL-720p, min: 10, preferred: 20, max: 60 }
+        - { name: Bluray-720p, min: 10, preferred: 20, max: 60 }
+        - { name: HDTV-1080p, min: 15, preferred: 35, max: 100 }
+        - { name: WEBRip-1080p, min: 15, preferred: 35, max: 100 }
+        - { name: WEBDL-1080p, min: 15, preferred: 35, max: 100 }
+        - { name: Bluray-1080p, min: 15, preferred: 35, max: 100 }
       radarr:
-        - { name: HDTV-720p, min: 10, preferred: 25, max: 40 }
-        - { name: WEBRip-720p, min: 10, preferred: 25, max: 40 }
-        - { name: WEBDL-720p, min: 10, preferred: 25, max: 40 }
-        - { name: Bluray-720p, min: 10, preferred: 25, max: 40 }
-        - { name: HDTV-1080p, min: 15, preferred: 45, max: 70 }
-        - { name: WEBRip-1080p, min: 15, preferred: 45, max: 70 }
-        - { name: WEBDL-1080p, min: 15, preferred: 45, max: 70 }
-        - { name: Bluray-1080p, min: 15, preferred: 45, max: 70 }
+        - { name: HDTV-720p, min: 10, preferred: 25, max: 60 }
+        - { name: WEBRip-720p, min: 10, preferred: 25, max: 60 }
+        - { name: WEBDL-720p, min: 10, preferred: 25, max: 60 }
+        - { name: Bluray-720p, min: 10, preferred: 25, max: 60 }
+        - { name: HDTV-1080p, min: 15, preferred: 45, max: 100 }
+        - { name: WEBRip-1080p, min: 15, preferred: 45, max: 100 }
+        - { name: WEBDL-1080p, min: 15, preferred: 45, max: 100 }
+        - { name: Bluray-1080p, min: 15, preferred: 45, max: 100 }
     bereich: medien
     braucht: apps.medien
     stufe: erweitert
-    text: Größengrenzen in MB pro Minute Laufzeit, je App eine Liste (60 MB/min = 3,6 GB pro Stunde)
+    text: Größengrenzen in MB pro Minute Laufzeit, je App eine Liste (100 MB/min = 6 GB pro Stunde)
     hinweis: >-
       Die TRaSH-Vorlage hat kein Maximum (Bluray-Encodes mit ~150 MB/min) und lehnte kleine x265-Encodes
       als zu klein ab. Eine App hier angeben ersetzt nur deren Liste.

@@ -89,6 +89,10 @@ stacks_beszel_webhook: ntfy://ntfy:80/beszel?scheme=http
 # WEB-Gruppen bis 2100). +1500 lässt ein deutsches WEB-Release mit x265 einen großen Bluray-Encode
 # mit x264 schlagen (Wunsch: platzsparend), ohne DL zu überstimmen.
 stacks_recyclarr_x265_score: 1500
+# "German Microsized" (FuN, GTF u. a.) blockiert die Vorlage mit -35000. Gewünscht: gleichwertig
+# erlauben. German DL + 1080p-Booster + x265 = 13200, +300 erreicht die Upgrade-Grenze 13500,
+# damit wird so ein Release nicht durch einen größeren Encode ersetzt (-35000 = wieder blockieren).
+stacks_recyclarr_microsized_score: 300
 # Servarr-Apps, die per API verbunden werden (Bibliotheksordner, SABnzbd-Kategorie).
 # Eigene Kategorienamen statt SABnzbds Standard-Kategorien tv/movies: deren Ordner gingen
 # im Test nach der Einrichtung wieder verloren, neu angelegte Kategorien blieben stabil (M5).
