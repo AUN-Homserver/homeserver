@@ -6,6 +6,14 @@ set -euo pipefail
 # shellcheck source=/dev/null
 . /etc/aunserver/erststart.env   # DATENPLATTE, RESTORE, ADMIN
 
+# network-online.target heißt nicht, dass Namen schon aufgelöst werden: im VM-Test brach apt-get
+# beim ersten Start mit "Temporärer Fehlschlag beim Auflösen" ab. Bis zu 5 Minuten warten.
+for _ in $(seq 60); do
+  getent hosts deb.debian.org >/dev/null && break
+  sleep 5
+done
+getent hosts deb.debian.org >/dev/null || echo "Warnung: deb.debian.org nach 5 Minuten nicht auflösbar, versuche es trotzdem." >&2
+
 args=(--yes)
 if [ -z "$(blkid -t LABEL=AUNDATA -o device 2>/dev/null || true)" ] && [ -n "${DATENPLATTE:-}" ]; then
   platte=$(lsblk -dn -o NAME,SERIAL | awk -v s="$DATENPLATTE" '$2 == s {print $1}')
