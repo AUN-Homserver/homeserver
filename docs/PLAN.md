@@ -58,6 +58,7 @@ Stand: 2026-10-19 · Status: im Betrieb auf dem echten NAS (`v0.9.0` + Updates),
 | D23 | Passwörter | Nicht mehr in `config.yml`, sondern als Dateien in `/etc/aunserver/secrets/`; `aunserver-config passwd` ändert sie wirksam (Samba, PS2, Web). Bestehende Konfigurationen werden automatisch migriert (entschieden 2026-10-28) | Heute wirkt `samba_password` nur beim ersten Lauf, das Web-Passwort ist nicht änderbar. |
 | D24 | Ersteinrichtung und Installer | Erststart-Assistent **im Browser** (Cockpit) zusätzlich zu whiptail; Installer fragt Hostname, Netz (DHCP/feste IP), Tastatur, SSH-Schlüssel; Rezept ohne Swap-Partition (zram). **Persönliches ISO**: `build-iso.sh --config` legt Antworten und Konfiguration aufs ISO, das Setup startet beim ersten Boot; formatiert wird nur eine per Seriennummer genannte Platte (entschieden 2026-10-28) | Weniger Handarbeit, Neuinstallation mit Restore ohne Dialoge, auch für weitere NAS. |
 | D25 | Umfang | **Medien-Stack abschaltbar**, dazu **Profile** (z. B. „Medien-NAS“ = heutiger Stand, „Nur Dateien“). Standard bleibt das heutige Verhalten (entschieden 2026-10-28) | Nicht jedes NAS braucht Usenet und Servarr. |
+| D26 | Merge nach `main` | **Merge Queue** von GitHub statt „Branch muss aktuell sein“: geprüft wird der Stand, der auf `main` landet (VM-Test dort immer), nur Merge-Commits; Renovate über das Auto-Merge von GitHub (entschieden 2026-11-05) | Nach jedem Merge mussten alle offenen PRs aktualisiert werden und noch einmal ~25 min durch den VM-Test, nacheinander. |
 
 ## 3. Architektur
 

@@ -4,9 +4,11 @@
 # der zweite Lauf darf nichts ändern. Dieselben Skripte wie lokal (installer/, dev/).
 name: vm-test
 # Läuft bei jedem PR, damit "vm-test" Pflicht-Check im Ruleset von main sein kann; die VM selbst
-# startet nur, wenn der PR etwas berührt, das auf dem NAS landet.
+# startet im PR nur, wenn er etwas berührt, das auf dem NAS landet. In der Merge Queue läuft sie
+# immer: geprüft wird dort der Stand, der auf main landet (main + PRs davor in der Schlange).
 "on":
   pull_request:
+  merge_group:
   workflow_dispatch:
 permissions:
   contents: read

@@ -1,8 +1,11 @@
 ---
 name: lint
+# Push nur auf main (sonst lief alles in PRs doppelt), merge_group für die Merge Queue
 "on":
   push:
+    branches: [main]
   pull_request:
+  merge_group:
 permissions:
   contents: read
 jobs:
@@ -73,10 +76,10 @@ jobs:
           fetch-depth: 0
       # gitleaks selbst statt gitleaks-action: die Action verlangt für Organisationen einen
       # Lizenzschlüssel (seit dem Umzug nach AUN-Homserver), das Programm nicht.
-      # Geprüft werden die neuen Commits (PR: seit der Basis, Push: seit dem vorigen Stand).
+      # Geprüft werden die neuen Commits (PR und Merge Queue: seit der Basis, Push: seit dem vorigen Stand).
       - name: gitleaks
         env:
-          BASIS: ${{ github.event.pull_request.base.sha || github.event.before }}
+          BASIS: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha || github.event.before }}
         run: |
           # neuer Branch (kein voriger Stand): alles seit main
           bereich=origin/main..HEAD

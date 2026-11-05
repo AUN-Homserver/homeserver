@@ -51,10 +51,10 @@
       "labels": ["abhängigkeiten", "major"]
     },
     {
-      "description": "Patch- und Minor-Updates merged Renovate selbst, sobald alle Prüfungen grün sind (auch der VM-Test); Major-Updates entscheidet der Nutzer. Aufs NAS kommt dadurch nichts automatisch, das macht erst 'sudo aunserver-update' nach der ntfy-Meldung (D20)",
+      "description": "Patch- und Minor-Updates merged Renovate selbst, sobald alle Prüfungen grün sind (auch der VM-Test); Major-Updates entscheidet der Nutzer. Über das Auto-Merge von GitHub, weil main eine Merge Queue hat (direktes Mergen lehnt das Ruleset ab). Aufs NAS kommt dadurch nichts automatisch, das macht erst 'sudo aunserver-update' nach der ntfy-Meldung (D20)",
       "matchUpdateTypes": ["minor", "patch", "digest", "pin", "pinDigest"],
       "automerge": true,
-      "platformAutomerge": false,
+      "platformAutomerge": true,
       "automergeType": "pr",
       "automergeStrategy": "merge-commit"
     },
