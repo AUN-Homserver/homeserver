@@ -78,10 +78,12 @@ jobs:
         env:
           BASIS: ${{ github.event.pull_request.base.sha || github.event.before }}
         run: |
-          bereich=""
+          # neuer Branch (kein voriger Stand): alles seit main
+          bereich=origin/main..HEAD
           if [ -n "$BASIS" ] && [ "$BASIS" != 0000000000000000000000000000000000000000 ] \
               && git cat-file -e "$BASIS^{commit}" 2>/dev/null; then
             bereich="$BASIS..HEAD"
           fi
+          echo "Prüfe $bereich"
           docker run --rm --network none -v "$PWD:/repo" -w /repo ghcr.io/gitleaks/gitleaks:v8.24.3 \
             detect --source . --no-banner --redact --verbose --log-opts="--no-merges $bereich"
