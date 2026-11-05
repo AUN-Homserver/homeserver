@@ -160,6 +160,14 @@ einstellungen:
     stufe: erweitert
     text: Ports für caddy_lan_ports; die Firewall öffnet genau diese (nur LAN). Die Startseite fehlt (Links nur auf Namen)
     braucht: caddy_lan_ports
+  caddy_eigene_seiten:
+    typ: liste
+    eintrag: objekt
+    standard: []
+    bereich: netz
+    stufe: erweitert
+    text: "Eigene Apps hinter Caddy, je Eintrag name (Subdomain), port (auf 127.0.0.1), optional lan_port und geschuetzt (Standard true)"
+    hinweis: "z. B. [{name: notizen, port: 3200, lan_port: 8430}]; den Container betreibt man selbst, lan_port gilt nur mit caddy_lan_ports"
   network_tailscale_routes:
     typ: liste
     eintrag: netz

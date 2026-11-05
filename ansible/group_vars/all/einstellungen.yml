@@ -52,6 +52,9 @@ stacks_lan_ports:
   recommendarr: 8416
   ps2gamemanager: 8417
 
+# Eigene Apps hinter Caddy, je Eintrag name (Subdomain), port (auf 127.0.0.1), optional lan_port und geschuetzt (Standard true)
+caddy_eigene_seiten: []
+
 # Route ins LAN, die das NAS im Tailnet anbietet; leer = nur die eigene Adresse (/32), ganzes LAN z. B. 192.168.1.0/24
 network_tailscale_routes: []
 
