@@ -15,7 +15,8 @@ stacks_images:
   # Medien (M5): linuxserver-Images, stabile Releases (keine nightly/develop-Tags)
   prowlarr: ghcr.io/linuxserver/prowlarr:2.6.5.5623-ls163
   sabnzbd: ghcr.io/linuxserver/sabnzbd:5.1.3-ls277
-  sonarr: ghcr.io/linuxserver/sonarr:4.0.20.3014-ls329
+  # linuxserver hat den Zähler bei Sonarr neu begonnen (ls329 -> ls1, Ende Oktober 2026); ls4 ist neuer
+  sonarr: ghcr.io/linuxserver/sonarr:4.0.20.3014-ls4
   radarr: ghcr.io/linuxserver/radarr:6.4.4.10685-ls321
   lidarr: ghcr.io/linuxserver/lidarr:3.1.0.4875-ls43
   bazarr: ghcr.io/linuxserver/bazarr:v1.6.2-ls368

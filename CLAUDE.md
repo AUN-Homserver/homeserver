@@ -10,7 +10,7 @@ An diesem Repo arbeiten **mehrere Claude-Sessions parallel**. Diese Regeln gelte
    Namen kurz, deutsch, kebab-case, ohne Präfix (wie bisher: `arcane-rechte`, `emby-tailscale`).
 4. **Nur auf dem eigenen Branch arbeiten.** Fremde Branches nicht ändern, nie `--force` auf fremde Branches; auf dem eigenen nur `--force-with-lease`.
 5. **Pull Request** mit `gh pr create` gegen `main`. Den Branch nur bei Konflikten auf `origin/main` bringen (mergen, sauber lösen); „aktuell halten“ übernimmt die Merge Queue.
-6. **Merge nach grüner CI** (alle Prüfungen, auch der VM-Test, und ohne neue Warnungen im Log) in die Merge Queue (`gh pr merge --merge --auto --delete-branch`, geht auch sofort nach dem PR: GitHub reiht ihn ein, sobald die Prüfungen grün sind, und die Queue testet noch einmal vor dem Merge); dafür ist kein extra OK des Nutzers nötig. Warnungen im Log danach trotzdem ansehen. Renovate merged Patch/Minor selbst, Major-Updates entscheidet der Nutzer.
+6. **Merge nach grüner CI** (alle Prüfungen, auch der VM-Test, und ohne neue Warnungen im Log) in die Merge Queue (`gh pr merge --merge --auto`; den Branch löscht GitHub nach dem Merge selbst, `--delete-branch` geht mit der Queue nicht; geht auch sofort nach dem PR: GitHub reiht ihn ein, sobald die Prüfungen grün sind, und die Queue testet noch einmal vor dem Merge); dafür ist kein extra OK des Nutzers nötig. Warnungen im Log danach trotzdem ansehen. Renovate merged Patch/Minor selbst, Major-Updates entscheidet der Nutzer.
 
 **Warum so streng:** `aunserver-update` auf dem echten NAS holt direkt den Stand von `main` (D20 in [docs/PLAN.md](docs/PLAN.md)). Alles, was auf `main` landet, kann auf dem Server ankommen.
 

@@ -46,6 +46,18 @@
       "enabled": false
     },
     {
+      "description": "linuxserver hängt eine Build-Nummer an (3.1.0.4875-ls43). Mit der Docker-Versionierung gilt '-ls43' als Variante wie '-alpine', dann wäre '-ls47' nie ein Update (Befund 2026-11-08). Die Muster lesen -lsNN als Zahl und lassen develop-, nightly- und Architektur-Tags aus. Vierstellige Versionen: -lsNN ist die Revision",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/linuxserver/{prowlarr,sonarr,radarr,lidarr}"],
+      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)\\.(?<build>\\d+)-ls(?<revision>\\d+)$"
+    },
+    {
+      "description": "Dreistellige Versionen (SABnzbd, Bazarr): -lsNN als build; mit optionalem build und revision in einem Muster fand Renovate dort kein Update",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/linuxserver/{sabnzbd,bazarr}"],
+      "versioning": "regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-ls(?<build>\\d+)$"
+    },
+    {
       "matchDatasources": ["docker", "github-releases"],
       "matchUpdateTypes": ["major"],
       "labels": ["abhängigkeiten", "major"]
