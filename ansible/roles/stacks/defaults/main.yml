@@ -19,7 +19,7 @@ stacks_images:
   sonarr: ghcr.io/linuxserver/sonarr:4.0.20.3014-ls4
   radarr: ghcr.io/linuxserver/radarr:6.4.4.10685-ls321
   lidarr: ghcr.io/linuxserver/lidarr:3.1.0.4875-ls43
-  bazarr: ghcr.io/linuxserver/bazarr:v1.6.2-ls368
+  bazarr: ghcr.io/linuxserver/bazarr:v1.6.2-ls371
   recyclarr: ghcr.io/recyclarr/recyclarr:8.8.0
   # 4.10 ist die stabile Version; 4.11.x sind Vorabversionen (Stand 2026-10-18)
   emby: docker.io/emby/embyserver:4.10.2.0
