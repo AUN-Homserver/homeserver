@@ -8,7 +8,7 @@ stacks_images:
   arcane: ghcr.io/getarcaneapp/arcane:v2.17.3
   beszel: docker.io/henrygd/beszel:0.21.1
   beszel_agent: docker.io/henrygd/beszel-agent:0.21.1
-  scrutiny: ghcr.io/analogj/scrutiny:v0.9.5-omnibus
+  scrutiny: ghcr.io/analogj/scrutiny:v0.10.0-omnibus
   dozzle: docker.io/amir20/dozzle:v11.4.2
   ntfy: docker.io/binwiederhier/ntfy:v2.37.2
   uptime_kuma: docker.io/louislam/uptime-kuma:2.5.9
