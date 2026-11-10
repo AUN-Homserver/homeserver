@@ -18,7 +18,7 @@ stacks_images:
   # linuxserver hat den Zähler bei Sonarr neu begonnen (ls329 -> ls1, Ende Oktober 2026); ls4 ist neuer
   sonarr: ghcr.io/linuxserver/sonarr:4.0.20.3014-ls4
   radarr: ghcr.io/linuxserver/radarr:6.4.4.10685-ls326
-  lidarr: ghcr.io/linuxserver/lidarr:3.1.0.4875-ls43
+  lidarr: ghcr.io/linuxserver/lidarr:3.1.6.5079-ls47
   bazarr: ghcr.io/linuxserver/bazarr:v1.6.2-ls371
   recyclarr: ghcr.io/recyclarr/recyclarr:8.8.0
   # 4.10 ist die stabile Version; 4.11.x sind Vorabversionen (Stand 2026-10-18)
