@@ -32,7 +32,7 @@ Einmalig nötig, damit die Namen wie `https://home.nas.home.arpa` funktionieren:
 
 Die Startseite fehlt (sie verlinkt nur die Namen); Emby (`http://<IP>:8096`) und Cockpit (`https://<IP>:9090`) gehen ohnehin per IP. Ports ändern: `stacks_lan_ports` in der `config.yml` überschreiben (die Firewall übernimmt sie). Die Liste steht auch in der Zugänge-Datei.
 
-**Eigene Apps hinter Caddy:** Läuft ein selbst betriebener Container auf `127.0.0.1:<port>`, reicht ein Eintrag in `caddy_eigene_seiten`, ein PR ist nicht nötig. Caddy richtet dann `https://<name>.<domain>` ein, standardmäßig mit dem Web-Passwort (`geschuetzt: false` schaltet das ab). Mit `caddy_lan_ports` und `lan_port` kommt `https://<IP>:<lan_port>` dazu, und die Firewall öffnet genau diesen Port im LAN:
+**Eigene Apps hinter Caddy:** Läuft ein selbst betriebener Container auf `127.0.0.1:<port>`, reicht ein Eintrag in `caddy_eigene_seiten`, ein PR ist nicht nötig. Caddy richtet dann `https://<name>.<domain>` ein, standardmäßig mit dem Web-Passwort (`geschuetzt: false` schaltet das ab). Mit `aun_layout` bekommt die Seite außerdem das AUN-Symbol als Favicon (`aun_symbol: false` schaltet das ab). Mit `caddy_lan_ports` und `lan_port` kommt `https://<IP>:<lan_port>` dazu, und die Firewall öffnet genau diesen Port im LAN:
 
 ```bash
 sudo aunserver-config set caddy_eigene_seiten "[{name: notizen, port: 3200, lan_port: 8430}]"
