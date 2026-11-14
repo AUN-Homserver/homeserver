@@ -11,6 +11,18 @@
 		{{ admin_user }} {{ stacks_web_password_hash }}
 	}
 }
+{% if aun_layout | bool %}
+
+# AUN-Layout: Symbol (Favicon, App-Symbole) der AUN-Dienste, die Datei legt proxy.yml in diesen Ordner
+(aun_symbol) {
+	@aun_symbol path_regexp (?i)/(favicon[^/]*\.(ico|png)|apple-touch-icon[^/]*\.png|android-chrome[^/]*\.png|icon-[0-9]+x[0-9]+\.png)$
+	handle @aun_symbol {
+		root * /etc/caddy
+		rewrite * /aun-favicon.png
+		file_server
+	}
+}
+{% endif %}
 
 # Stammzertifikat per HTTP abholbar, damit Geräte ohne installierte CA es laden können
 http://{{ domain }} {
@@ -89,6 +101,9 @@ http://{{ domain }} {
 {% endif %}
 {% if apps.emby | bool %}
 {{ stacks_hosts.emby }}.{{ domain }} {
+{% if aun_layout | bool %}
+	import aun_symbol
+{% endif %}
 	reverse_proxy 127.0.0.1:{{ stacks_ports.emby }}
 }
 
@@ -114,6 +129,9 @@ http://{{ domain }} {
 {{ seite.name }}.{{ domain }}{% if caddy_lan_ports | bool and seite.lan_port is defined %}, https://{{ ansible_facts.default_ipv4.address }}:{{ seite.lan_port }}{% endif %} {
 {% if seite.geschuetzt | default(true) | bool %}
 	import geschuetzt
+{% endif %}
+{% if aun_layout | bool and seite.aun_symbol | default(true) | bool %}
+	import aun_symbol
 {% endif %}
 	reverse_proxy 127.0.0.1:{{ seite.port }}
 }

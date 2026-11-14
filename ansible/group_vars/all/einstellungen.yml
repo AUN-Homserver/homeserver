@@ -52,7 +52,7 @@ stacks_lan_ports:
   recommendarr: 8416
   ps2gamemanager: 8417
 
-# Eigene Apps hinter Caddy, je Eintrag name (Subdomain), port (auf 127.0.0.1), optional lan_port und geschuetzt (Standard true)
+# Eigene Apps hinter Caddy, je Eintrag name (Subdomain), port (auf 127.0.0.1), optional lan_port, geschuetzt und aun_symbol (Standard true)
 caddy_eigene_seiten: []
 
 # Route ins LAN, die das NAS im Tailnet anbietet; leer = nur die eigene Adresse (/32), ganzes LAN z. B. 192.168.1.0/24
@@ -119,7 +119,7 @@ stacks_recyclarr_groessen:
     - {name: WEBDL-1080p, min: 15, preferred: 45, max: 100}
     - {name: Bluray-1080p, min: 15, preferred: 45, max: 100}
 
-# AUN-Layout: Hintergrund und Logo auf Startseite und Cockpit-Anmeldung, alle Bilder in der Freigabe shares/AUN-Layout
+# AUN-Layout: Hintergrund und Logo auf Startseite und Cockpit, AUN-Symbol für Emby und eigene Apps, Bilder in shares/AUN-Layout
 aun_layout: true
 
 # Wallpaper als Hintergrund der Startseite (Homepage)

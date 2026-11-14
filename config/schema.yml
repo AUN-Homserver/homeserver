@@ -166,8 +166,8 @@ einstellungen:
     standard: []
     bereich: netz
     stufe: erweitert
-    text: "Eigene Apps hinter Caddy, je Eintrag name (Subdomain), port (auf 127.0.0.1), optional lan_port und geschuetzt (Standard true)"
-    hinweis: "z. B. [{name: notizen, port: 3200, lan_port: 8430}]; den Container betreibt man selbst, lan_port gilt nur mit caddy_lan_ports"
+    text: "Eigene Apps hinter Caddy, je Eintrag name (Subdomain), port (auf 127.0.0.1), optional lan_port, geschuetzt und aun_symbol (Standard true)"
+    hinweis: "z. B. [{name: notizen, port: 3200, lan_port: 8430}]; den Container betreibt man selbst, lan_port nur mit caddy_lan_ports"
   network_tailscale_routes:
     typ: liste
     eintrag: netz
@@ -344,10 +344,11 @@ einstellungen:
     standard: true
     bereich: system
     stufe: erweitert
-    text: "AUN-Layout: Hintergrund und Logo auf Startseite und Cockpit-Anmeldung, alle Bilder in der Freigabe shares/AUN-Layout"
+    text: "AUN-Layout: Hintergrund und Logo auf Startseite und Cockpit, AUN-Symbol für Emby und eigene Apps, Bilder in shares/AUN-Layout"
     hinweis: >-
-      Wallpaper für Kodi, Bilder für die Emby-Bibliotheken und Logos aus assets/aun-layout. Ausschalten
-      nimmt Hintergrund und Logo von Startseite und Cockpit, der Ordner in der Freigabe bleibt.
+      Wallpaper für Kodi, Bilder für die Emby-Bibliotheken und Logos aus assets/aun-layout. Das AUN-Symbol
+      (Favicon) liefert Caddy für Emby und für caddy_eigene_seiten aus (dort einzeln mit aun_symbol: false abschaltbar).
+      Ausschalten nimmt Hintergrund und Logo von Startseite und Cockpit und die Symbole, der Ordner in der Freigabe bleibt.
   homepage_hintergrund:
     typ: auswahl
     werte: [roll-it, error-420, high-time, its-420, puff-puff-play, stay-high, rewind-relax,

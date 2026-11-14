@@ -5,3 +5,20 @@
     stack_name: proxy
     stack_files: [compose.yaml, caddy/Caddyfile]
     stack_restart: [caddy]
+
+# AUN-Symbol für Emby und eigene Apps (Caddyfile: aun_symbol). Der Ordner ist in Caddy gemountet
+# und file_server liest die Datei bei jeder Anfrage, ein Neustart ist nicht nötig.
+- name: AUN-Symbol für Caddy
+  ansible.builtin.copy:
+    src: "{{ aun_layout_dir }}/logos/aun-favicon.png"
+    dest: "{{ stacks_dir }}/proxy/caddy/aun-favicon.png"
+    owner: root
+    group: docker
+    mode: "0640"
+  when: aun_layout | bool
+
+- name: AUN-Symbol entfernen (aun_layout aus)
+  ansible.builtin.file:
+    path: "{{ stacks_dir }}/proxy/caddy/aun-favicon.png"
+    state: absent
+  when: not (aun_layout | bool)
