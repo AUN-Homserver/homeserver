@@ -22,13 +22,17 @@ class AunLayout(unittest.TestCase):
         self.assertTrue(os.path.isfile(os.path.join(LAYOUT, "logos", "aun-favicon.png")))
 
     def test_aun_symbol_nur_fuer_aun_dienste(self):
-        # Caddy liefert das Favicon nur für Emby und eigene Apps, Fremd-Apps (Sonarr usw.) behalten ihres
+        # Caddy liefert das Favicon nur für AUN-Dienste (Emby, Recommendarr, PS2 Game Manager, eigene Apps),
+        # Fremd-Apps (Sonarr usw.) behalten ihres
         with open(os.path.join(REPO, "stacks", "proxy", "caddy", "Caddyfile.j2"), encoding="utf-8") as f:
             caddy = f.read()
         self.assertIn("(aun_symbol) {", caddy)
         bloecke = caddy.split("\n{{ ")
         mit = [b.split(" ", 1)[0] for b in bloecke if "import aun_symbol" in b]
-        self.assertEqual(sorted(mit), ["seite.name", "stacks_hosts.emby"])
+        self.assertEqual(
+            sorted(mit),
+            ["seite.name", "stacks_hosts.emby", "stacks_hosts.ps2gamemanager", "stacks_hosts.recommendarr"],
+        )
         with open(os.path.join(REPO, "ansible", "roles", "stacks", "tasks", "proxy.yml"), encoding="utf-8") as f:
             self.assertIn("logos/aun-favicon.png", f.read())
 

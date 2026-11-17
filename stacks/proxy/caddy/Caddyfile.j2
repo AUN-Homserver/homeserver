@@ -112,6 +112,9 @@ http://{{ domain }} {
 # eigene App ohne Login: Passwort in Caddy
 {{ stacks_hosts.recommendarr }}.{{ domain }}{{ lan('recommendarr') }} {
 	import geschuetzt
+{% if aun_layout | bool %}
+	import aun_symbol
+{% endif %}
 	reverse_proxy 127.0.0.1:{{ stacks_ports.recommendarr }}
 }
 
@@ -120,6 +123,9 @@ http://{{ domain }} {
 # hat Schreibzugriff auf die ganze Datenplatte: Passwort in Caddy
 {{ stacks_hosts.ps2gamemanager }}.{{ domain }}{{ lan('ps2gamemanager') }} {
 	import geschuetzt
+{% if aun_layout | bool %}
+	import aun_symbol
+{% endif %}
 	reverse_proxy 127.0.0.1:{{ stacks_ports.ps2gamemanager }}
 }
 

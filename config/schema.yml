@@ -344,7 +344,7 @@ einstellungen:
     standard: true
     bereich: system
     stufe: erweitert
-    text: "AUN-Layout: Hintergrund und Logo auf Startseite und Cockpit, AUN-Symbol für Emby und eigene Apps, Bilder in shares/AUN-Layout"
+    text: "AUN-Layout: Hintergrund und Logo auf Startseite und Cockpit, AUN-Symbol für Emby, Recommendarr, PS2 und eigene Apps, Bilder in shares/AUN-Layout"
     hinweis: >-
       Wallpaper für Kodi, Bilder für die Emby-Bibliotheken und Logos aus assets/aun-layout. Das AUN-Symbol
       (Favicon) liefert Caddy für Emby und für caddy_eigene_seiten aus (dort einzeln mit aun_symbol: false abschaltbar).
