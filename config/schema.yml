@@ -278,6 +278,16 @@ einstellungen:
     stufe: erweitert
     text: DLNA-Abspielgeräte (z. B. Sonos) für Emby „Wiedergabe auf“, feste IPs
     braucht: apps.emby
+  emby_dlna_renderers_port:
+    typ: zahl
+    min: 0
+    max: 65535
+    standard: 0
+    bereich: medien
+    stufe: erweitert
+    text: Zusätzlicher TCP-Port, den nur die DLNA-Abspielgeräte erreichen (z. B. Audiodateien eines eigenen Dienstes), 0 = aus
+    hinweis: Gilt nur zusammen mit emby_dlna_renderers; auch für einen veröffentlichten Container-Port (gleiche Nummer innen und außen)
+    braucht: apps.emby
   recyclarr_eigene_config:
     typ: bool
     standard: false

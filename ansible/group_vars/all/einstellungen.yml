@@ -89,6 +89,9 @@ update_check: true
 # DLNA-Abspielgeräte (z. B. Sonos) für Emby „Wiedergabe auf“, feste IPs
 emby_dlna_renderers: []
 
+# Zusätzlicher TCP-Port, den nur die DLNA-Abspielgeräte erreichen (z. B. Audiodateien eines eigenen Dienstes), 0 = aus
+emby_dlna_renderers_port: 0
+
 # Eigene recyclarr.yml im appdata-Ordner statt der TRaSH-Vorlage
 recyclarr_eigene_config: false
 
