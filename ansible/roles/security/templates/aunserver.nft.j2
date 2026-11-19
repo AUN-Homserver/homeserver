@@ -58,6 +58,10 @@ table inet aunserver {
 		# SSDP der Abspielgeräte: Ankündigungen an 1900, Antworten vom Zufallsport an Embys Zufallsports
 		ip saddr @dlna_renderers udp dport 1900 accept
 		ip saddr @dlna_renderers udp sport 32768-60999 udp dport 32768-60999 accept
+{% if emby_dlna_renderers_port | int > 0 %}
+		# Optionaler Zusatzport nur für die Abspielgeräte (emby_dlna_renderers_port)
+		ip saddr @dlna_renderers tcp dport {{ emby_dlna_renderers_port }} accept
+{% endif %}
 {% endif %}
 {% endif %}
 {% if apps.tailscale | bool %}
@@ -81,6 +85,10 @@ table inet aunserver {
 	# sind aus LAN/VPN nicht erreichbar (Docker leitet sie an input vorbei).
 	chain forward {
 		type filter hook forward priority filter - 10; policy accept;
+{% if apps.emby | bool and emby_dlna_renderers | length > 0 and emby_dlna_renderers_port | int > 0 %}
+		# Ausnahme: der Zusatzport der Abspielgeräte darf ein veröffentlichter Container-Port sein
+		ct state new ct status dnat ip saddr @dlna_renderers tcp dport {{ emby_dlna_renderers_port }} accept
+{% endif %}
 		ct state new ct status dnat iifname != { "docker0", "lo" } iifname != "br-*" drop
 	}
 }
