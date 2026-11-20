@@ -288,6 +288,16 @@ einstellungen:
     text: Zusätzlicher TCP-Port, den nur die DLNA-Abspielgeräte erreichen (z. B. Audiodateien eines eigenen Dienstes), 0 = aus
     hinweis: Gilt nur zusammen mit emby_dlna_renderers; auch für einen veröffentlichten Container-Port (gleiche Nummer innen und außen)
     braucht: apps.emby
+  emby_speichergrenze_mb:
+    typ: zahl
+    min: 0
+    max: 1048576
+    standard: 0
+    bereich: medien
+    stufe: erweitert
+    text: Höchster Arbeitsspeicher für Emby in MB, 0 = keine Grenze
+    hinweis: Darüber beendet der Kernel nur Emby und Docker startet es neu, statt dass der Server durch Auslagern hängt; ohne Swap
+    braucht: apps.emby
   recyclarr_eigene_config:
     typ: bool
     standard: false

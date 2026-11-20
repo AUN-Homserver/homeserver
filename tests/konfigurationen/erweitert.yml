@@ -31,6 +31,7 @@ samba_legacy:
       path: games/ps2
 emby_dlna_renderers: [192.168.178.110, 192.168.178.207]
 emby_dlna_renderers_port: 8470
+emby_speichergrenze_mb: 3072
 network_tailscale_exit_node: true
 recyclarr_eigene_config: true
 ntfy_default_access: write-only

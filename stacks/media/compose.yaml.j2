@@ -113,6 +113,11 @@ services:
     container_name: emby
     restart: unless-stopped
     network_mode: host
+{% if emby_speichergrenze_mb | int > 0 %}
+    # Speichergrenze (emby_speichergrenze_mb): bei Überschreitung trifft der OOM-Killer nur Emby, restart startet neu
+    mem_limit: {{ emby_speichergrenze_mb | int }}m
+    memswap_limit: {{ emby_speichergrenze_mb | int }}m
+{% endif %}
     environment:
       UID: "{{ puid }}"
       GID: "{{ pgid }}"
