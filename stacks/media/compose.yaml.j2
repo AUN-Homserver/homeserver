@@ -144,6 +144,20 @@ services:
       - {{ appdata_dir }}/recommendarr:/data
     ports:
       - 127.0.0.1:{{ stacks_ports.recommendarr }}:3000
+{% if recommendarr_eigene_anmeldung | bool %}
+    environment:
+      # Anmeldung der App statt Caddy-Passwort; Caddy davor setzt X-Forwarded-*
+      AUTH_PASSWORD: "{{ stacks_web_password }}"
+      TRUST_PROXY: "1"
+    # Der Healthcheck des Images fragt /api/version, das mit AUTH_PASSWORD eine Sitzung
+    # verlangt (401, Container bliebe "unhealthy"); /api/auth/status geht ohne
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/api/auth/status').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))"]
+      interval: 60s
+      timeout: 10s
+      start_period: 30s
+      retries: 3
+{% endif %}
 {% endif %}
 
 networks:

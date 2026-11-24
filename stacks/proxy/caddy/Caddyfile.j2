@@ -109,9 +109,13 @@ http://{{ domain }} {
 
 {% endif %}
 {% if apps.recommendarr | bool %}
-# eigene App ohne Login: Passwort in Caddy
 {{ stacks_hosts.recommendarr }}.{{ domain }}{{ lan('recommendarr') }} {
+{% if recommendarr_eigene_anmeldung | bool %}
+	# eigene Anmeldung der App (recommendarr_eigene_anmeldung), Web-Passwort
+{% else %}
+	# Passwort in Caddy (ohne recommendarr_eigene_anmeldung ist die App offen)
 	import geschuetzt
+{% endif %}
 	reverse_proxy 127.0.0.1:{{ stacks_ports.recommendarr }}
 }
 

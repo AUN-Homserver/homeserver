@@ -27,18 +27,18 @@ Eigenes Konto beim ersten Aufruf festlegen
 
 {% if apps.medien | bool %}
 Medien (Prowlarr, Sonarr, Radarr, Lidarr: Benutzer {{ admin_user }} + Web-Passwort;
-SABnzbd, Bazarr{{ ', Recommendarr' if apps.recommendarr | bool else '' }}{{ ', PS2GameManager' if apps.ps2gamemanager | bool else '' }}: Passwortabfrage des Browsers, ebenfalls Web-Passwort)
+SABnzbd, Bazarr{{ ', Recommendarr' if apps.recommendarr | bool and not recommendarr_eigene_anmeldung | bool else '' }}{{ ', PS2GameManager' if apps.ps2gamemanager | bool else '' }}: Passwortabfrage des Browsers, ebenfalls Web-Passwort)
 {% for app in ['prowlarr', 'sonarr', 'radarr', 'lidarr', 'sabnzbd', 'bazarr'] %}
   {{ '%-13s' | format(app | capitalize) }} https://{{ stacks_hosts[app] }}.{{ domain }}
 {% endfor %}
 {% elif apps.emby | bool or apps.recommendarr | bool or apps.ps2gamemanager | bool %}
-Weitere Apps{{ ' (Recommendarr, PS2GameManager: Passwortabfrage des Browsers, Web-Passwort)' if apps.recommendarr | bool or apps.ps2gamemanager | bool else '' }}
+Weitere Apps{{ ' (Recommendarr, PS2GameManager: Passwortabfrage des Browsers, Web-Passwort)' if (apps.recommendarr | bool and not recommendarr_eigene_anmeldung | bool) or apps.ps2gamemanager | bool else '' }}
 {% endif %}
 {% if apps.emby | bool %}
   Emby          https://{{ stacks_hosts.emby }}.{{ domain }}   (Fernseher/Apps: http://{{ ansible_facts.default_ipv4.address }}:8096; Konto beim ersten Aufruf anlegen)
 {% endif %}
 {% if apps.recommendarr | bool %}
-  Recommendarr  https://{{ stacks_hosts.recommendarr }}.{{ domain }}
+  Recommendarr  https://{{ stacks_hosts.recommendarr }}.{{ domain }}{{ '   (Anmeldeseite der App, Web-Passwort)' if recommendarr_eigene_anmeldung | bool else '' }}
 {% endif %}
 {% if apps.ps2gamemanager | bool %}
   PS2GameMgr    https://{{ stacks_hosts.ps2gamemanager }}.{{ domain }}
