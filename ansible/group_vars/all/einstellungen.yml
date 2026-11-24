@@ -95,6 +95,9 @@ emby_dlna_renderers_port: 0
 # Höchster Arbeitsspeicher für Emby in MB, 0 = keine Grenze
 emby_speichergrenze_mb: 0
 
+# Recommendarr mit eigener Anmeldeseite (Web-Passwort) statt der Passwortabfrage des Browsers über Caddy
+recommendarr_eigene_anmeldung: false
+
 # Eigene recyclarr.yml im appdata-Ordner statt der TRaSH-Vorlage
 recyclarr_eigene_config: false
 

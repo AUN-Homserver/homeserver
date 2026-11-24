@@ -66,6 +66,14 @@ jobs:
             grep -q sonarr "$RUNNER_TEMP/vorlagen/standard/$f"
             if grep sonarr "$RUNNER_TEMP/vorlagen/ohne-medien/$f"; then exit 1; fi
           done
+          # Recommendarr mit eigener Anmeldung: Passwort an die App, kein Caddy-Passwort davor
+          pruefe recommendarr-anmeldung 'recommendarr_eigene_anmeldung: true' media
+          v="$RUNNER_TEMP/vorlagen"
+          grep -q 'AUTH_PASSWORD: "test-passwort"' "$v/recommendarr-anmeldung/media/compose.yaml"
+          if grep -q AUTH_PASSWORD "$v/standard/media/compose.yaml"; then exit 1; fi
+          block() { awk '/^recommendarr\./ {f=1} f && /^}/ {exit} f' "$1"; }
+          block "$v/standard/proxy/Caddyfile" | grep -q 'import geschuetzt'
+          if block "$v/recommendarr-anmeldung/proxy/Caddyfile" | grep -q 'import geschuetzt'; then exit 1; fi
       - name: Syntaxprüfung
         run: cd ansible && ansible-playbook -i localhost, site.yml --syntax-check -e @../config.example.yml
   secrets:

@@ -298,6 +298,14 @@ einstellungen:
     text: Höchster Arbeitsspeicher für Emby in MB, 0 = keine Grenze
     hinweis: Darüber beendet der Kernel nur Emby und Docker startet es neu, statt dass der Server durch Auslagern hängt; ohne Swap
     braucht: apps.emby
+  recommendarr_eigene_anmeldung:
+    typ: bool
+    standard: false
+    bereich: medien
+    stufe: erweitert
+    text: Recommendarr mit eigener Anmeldeseite (Web-Passwort) statt der Passwortabfrage des Browsers über Caddy
+    hinweis: "An: Login-Seite der App, Abmelden, Sitzung 30 Tage, Sperre nach Fehlversuchen; Caddy fragt dann nicht mehr. Ab Recommendarr 2.13.0"
+    braucht: apps.recommendarr
   recyclarr_eigene_config:
     typ: bool
     standard: false
